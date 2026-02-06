@@ -161,8 +161,8 @@ export default function SunflowerDecoration({ position }: { position: 'top-left'
         {config.sunflowers.map((sunflower, index) => (
           <g
             key={index}
-            className={`sunflower-${sunflower.animation}`}
-            style={{ transformOrigin: `${sunflower.x}px ${sunflower.y}px` }}
+            className={`sunflower sunflower-${sunflower.animation}`}
+            style={{ transformOrigin: `${sunflower.x}px ${sunflower.y}px`, animationDelay: `${index * 0.5}s` }}
           >
             <SunflowerSVG
               size={sunflower.size}

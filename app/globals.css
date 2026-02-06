@@ -96,11 +96,14 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
@@ -327,5 +330,51 @@ svg g.sunflower-sway3 {
   border-radius: 50% 0 50% 50%;
   animation: petal-fall 15s linear infinite;
   opacity: 0.2;
+}
+
+/* Global button hover animations */
+button {
+  transition: all 0.25s ease;
+}
+
+/* Apply hover effect to all buttons, but respect existing transforms */
+button:hover:not(:disabled):not(.no-hover-lift) {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* For buttons with existing transform, combine them */
+button.group:hover:not(:disabled),
+button[class*="hover:scale"]:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* Sunflower floating animation */
+.sunflower {
+  animation: float 6s ease-in-out infinite;
+}
+
+.sunflower:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+.sunflower:nth-of-type(2) {
+  animation-delay: 1s;
+}
+
+.sunflower:nth-of-type(3) {
+  animation-delay: 2s;
+}
+
+.sunflower:nth-of-type(4) {
+  animation-delay: 0.5s;
+}
+
+.sunflower:nth-of-type(5) {
+  animation-delay: 1.5s;
+}
+
+.sunflower:nth-of-type(6) {
+  animation-delay: 2.5s;
 }
 

@@ -25,8 +25,9 @@ export default function FeelingModal({ isOpen, onClose, title, message }: Feelin
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in modal-overlay"
       onClick={onClose}
+      style={{ backdropFilter: 'blur(6px)', background: 'rgba(0,0,0,0.25)' }}
     >
       <div
         className="bg-peach rounded-3xl shadow-2xl max-w-lg w-full p-8 relative border-2 border-blush/30 animate-fade-in"

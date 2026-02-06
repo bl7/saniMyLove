@@ -71,8 +71,11 @@ export default function Home() {
           <p className="font-sans text-lg sm:text-xl md:text-2xl text-brown/90 mb-8 leading-relaxed animate-fade-in-2 hero-subtitle max-w-2xl mx-auto">
             Since I can't be there with you this Valentine's Day, I made a little place you can come to whenever you need me.
           </p>
-          <p className="font-sans text-brown/80 text-sm sm:text-base italic mb-12 animate-fade-in-2 hero-signature">
+          <p className="font-sans text-brown/80 text-sm sm:text-base italic mb-4 animate-fade-in-2 hero-signature">
             Made with all my love.
+          </p>
+          <p className="font-script text-brown/70 text-xs sm:text-sm italic mb-12 animate-fade-in-2 hero-whisper" style={{ opacity: 0.7, marginTop: '0.5rem' }}>
+            For the girl who holds my heart, even from miles away.
           </p>
           <p className="font-sans text-brown/70 text-base sm:text-lg animate-fade-in-3 animate-float hero-cta">
             Choose how you're feeling…
@@ -93,7 +96,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center mb-6 animate-fade-in">
             <div className="relative w-full max-w-[75%] md:max-w-[70%]">
-              <div className="relative w-full aspect-[3/4] rounded-[20px] overflow-hidden shadow-[0_10px_30px_rgba(246,197,68,0.25)] border-2 border-sunflower bg-gradient-to-br from-sunflower/20 to-blush/20">
+              <div className="relative w-full aspect-[3/4] rounded-[20px] overflow-hidden border-2 border-sunflower bg-gradient-to-br from-sunflower/20 to-blush/20" style={{ boxShadow: '0 20px 40px rgba(246,197,68,0.35)' }}>
                 <img
                   src="/together.jpg"
                   alt="Us together"
@@ -121,15 +124,15 @@ export default function Home() {
             My favorite place has always been next to you.
           </p>
         </div>
-        <SunflowerDecoration position="bottom-left" />
-        <SunflowerDecoration position="bottom-right" />
       </section>
 
       {/* Feelings Section */}
       <section className="py-20 px-4 relative">
-        <SunflowerDecoration position="top-left" />
-        <SunflowerDecoration position="middle-right" />
+        <SunflowerDecoration position="top-right" />
         <div className="max-w-4xl mx-auto">
+          <h2 className="font-script text-3xl md:text-4xl text-brown text-center mb-12 animate-fade-in">
+            A message for you...
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {feelings.map((feeling, index) => (
               <FeelingButton
@@ -155,8 +158,7 @@ export default function Home() {
 
       {/* Photo Section */}
       <section className="py-20 px-4 relative">
-        <SunflowerDecoration position="top-right" />
-        <SunflowerDecoration position="middle-left" />
+        <SunflowerDecoration position="bottom-left" />
         <div className="max-w-xl mx-auto text-center">
           <div className="relative mb-6 animate-fade-in">
             <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(246,197,68,0.25)] border-2 border-sunflower animate-float-photo">
@@ -178,14 +180,12 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-peach py-16 px-4 relative">
-        <SunflowerDecoration position="top-center" />
-        <SunflowerDecoration position="bottom-left" />
         <SunflowerDecoration position="bottom-right" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <p className="font-sans text-xl md:text-2xl text-brown leading-relaxed animate-fade-in">
             No matter where we are, my heart is always with you, Sani 🌻
             <br />
-            <span className="font-script text-2xl md:text-3xl mt-4 inline-block">
+            <span className="font-script text-3xl md:text-4xl mt-6 inline-block" style={{ marginTop: '1.5rem' }}>
               Happy Valentine&apos;s Day ❤️
             </span>
           </p>
