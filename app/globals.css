@@ -5,7 +5,44 @@
 @layer base {
   body {
     @apply bg-cream text-brown;
+    overflow: hidden; /* Prevent body scroll, main handles it */
   }
+  
+  html {
+    overflow: hidden; /* Prevent html scroll */
+  }
+}
+
+/* Scroll snap container - app-like seamless scrolling */
+.snap-scroll-container {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  overscroll-behavior: none; /* Prevent scroll chaining */
+  scroll-padding: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.snap-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin: 0;
+  flex-shrink: 0; /* Prevent sections from shrinking */
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden; /* Prevent content from spilling out */
 }
 
 @layer utilities {

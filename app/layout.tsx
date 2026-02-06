@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${playfair.variable} ${poppins.variable} font-sans antialiased`}>
+    <html lang="en" style={{ height: '100%', overflow: 'hidden', scrollBehavior: 'smooth' }}>
+      <body className={`${playfair.variable} ${poppins.variable} font-sans antialiased`} style={{ height: '100%', overflow: 'hidden', touchAction: 'pan-y' }}>
         {children}
       </body>
     </html>

@@ -7,6 +7,8 @@ import SunflowerPetals from './components/SunflowerPetals'
 import SunflowerDecoration from './components/SunflowerDecoration'
 import SunflowerField from './components/SunflowerField'
 import AudioPlayer from './components/AudioPlayer'
+import ScrollDots from './components/ScrollDots'
+import EnforceSnap from './components/EnforceSnap'
 import Image from 'next/image'
 
 const feelings = [
@@ -44,9 +46,9 @@ export default function Home() {
   const [openModal, setOpenModal] = useState<number | null>(null)
 
   return (
-    <main className="min-h-screen sunflower-pattern">
+    <main className="sunflower-pattern snap-scroll-container">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center px-4 py-12 sm:py-20" style={{ overflow: 'hidden', minHeight: '100vh' }}>
+      <section className="snap-section relative flex items-center justify-center px-4" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <div className="absolute inset-0 z-0">
           {/* Sunflower field background - inspired by golden hour field */}
           <SunflowerField />
@@ -91,12 +93,12 @@ export default function Home() {
       </section>
 
       {/* Couple Photo Section - Memory Moment */}
-      <section className="py-20 px-4 relative bg-peach/30">
+      <section className="snap-section relative flex items-center justify-center px-4 bg-peach/30" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="top-center" />
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-xl mx-auto w-full">
           <div className="flex justify-center mb-6 animate-fade-in">
-            <div className="relative w-full max-w-[75%] md:max-w-[70%]">
-              <div className="relative w-full aspect-[3/4] rounded-[20px] overflow-hidden border-2 border-sunflower bg-gradient-to-br from-sunflower/20 to-blush/20" style={{ boxShadow: '0 20px 40px rgba(246,197,68,0.35)' }}>
+            <div className="relative w-full max-w-md mx-auto">
+              <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden border-2 border-sunflower bg-gradient-to-br from-sunflower/20 to-blush/20" style={{ boxShadow: '0 20px 40px rgba(246,197,68,0.35)' }}>
                 <img
                   src="/together.jpg"
                   alt="Us together"
@@ -127,9 +129,9 @@ export default function Home() {
       </section>
 
       {/* Feelings Section */}
-      <section className="py-20 px-4 relative">
+      <section className="snap-section relative flex items-center justify-center px-4" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="top-right" />
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto w-full">
           <h2 className="font-script text-3xl md:text-4xl text-brown text-center mb-12 animate-fade-in">
             A message for you...
           </h2>
@@ -157,9 +159,9 @@ export default function Home() {
       </section>
 
       {/* Photo Section */}
-      <section className="py-20 px-4 relative">
+      <section className="snap-section relative flex items-center justify-center px-4" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="bottom-left" />
-        <div className="max-w-xl mx-auto text-center">
+        <div className="max-w-xl mx-auto text-center w-full">
           <div className="relative mb-6 animate-fade-in">
             <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(246,197,68,0.25)] border-2 border-sunflower animate-float-photo">
               <Image
@@ -179,9 +181,9 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-peach py-16 px-4 relative">
+      <footer className="snap-section relative flex items-center justify-center px-4 bg-peach" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="bottom-right" />
-        <div className="max-w-3xl mx-auto text-center relative z-10">
+        <div className="max-w-3xl mx-auto text-center relative z-10 w-full">
           <p className="font-sans text-xl md:text-2xl text-brown leading-relaxed animate-fade-in">
             No matter where we are, my heart is always with you, Sani 🌻
             <br />
@@ -194,6 +196,12 @@ export default function Home() {
 
       {/* Audio Player - Floating Button */}
       <AudioPlayer />
+      
+      {/* Scroll Navigation Dots */}
+      <ScrollDots />
+      
+      {/* Enforce snap behavior */}
+      <EnforceSnap />
     </main>
   )
 }
