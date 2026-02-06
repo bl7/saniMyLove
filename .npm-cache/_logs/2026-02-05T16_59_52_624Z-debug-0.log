@@ -1,0 +1,19 @@
+0 verbose cli /opt/homebrew/Cellar/node@20/20.19.4/bin/node /opt/homebrew/opt/node@20/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/opt/homebrew/Cellar/node@20/20.19.4/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/biswashlamichhane/Projects/sani/.npmrc
+5 silly config load:file:/Users/biswashlamichhane/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:/Users/biswashlamichhane/Projects/sani/.npm-cache/_logs/2026-02-05T16_59_52_624Z-
+10 verbose logfile /Users/biswashlamichhane/Projects/sani/.npm-cache/_logs/2026-02-05T16_59_52_624Z-debug-0.log
+11 silly logfile done cleaning log files
+12 verbose cwd /Users/biswashlamichhane/Projects/sani
+13 verbose os Darwin 24.6.0
+14 verbose node v20.19.4
+15 verbose npm  v10.8.2
+16 verbose exit 1
+17 verbose code 1
+18 error A complete log of this run can be found in: /Users/biswashlamichhane/Projects/sani/.npm-cache/_logs/2026-02-05T16_59_52_624Z-debug-0.log
