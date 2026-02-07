@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import FeelingButton from './components/FeelingButton'
 import FeelingModal from './components/FeelingModal'
 import SunflowerPetals from './components/SunflowerPetals'
@@ -9,52 +10,81 @@ import SunflowerField from './components/SunflowerField'
 import AudioPlayer from './components/AudioPlayer'
 import ScrollDots from './components/ScrollDots'
 import EnforceSnap from './components/EnforceSnap'
+import OpeningLetterOverlay from './components/OpeningLetterOverlay'
+import FloatingHearts from './components/FloatingHearts'
+import Timeline from './components/Timeline'
+import ValentineWeekDecorations from './components/ValentineWeekDecorations'
 import Image from 'next/image'
+import { getValentineTheme } from './utils/valentinesWeek'
 
 const feelings = [
   {
     title: 'When You Miss Me',
-    message: `Sani, I miss you in the smallest moments.
-The random thoughts, the things I wish I could tell you in person, the silence that would feel better if you were next to me.
-But every second apart still belongs to us.
-Close your eyes for a few seconds… that's me holding you tight.`,
+    message: `If you miss me...
+close your eyes for a second.
+I'm somewhere in the world thinking about you too.
+Distance is just geography.
+You are still my home.`,
   },
   {
     title: 'When You\'re Stressed',
-    message: `I know you carry a lot sometimes, even when you don't say it.
-I just want you to remember how strong, capable, and amazing you are.
-And you don't have to face everything alone — you have me, always in your corner.
-If I were there, I'd pull you into a hug and not let go until you smiled.`,
+    message: `Breathe. Slow down.
+You don't have to carry the world alone.
+I'm always on your team.`,
   },
   {
     title: 'When You Can\'t Sleep',
-    message: `If I were there right now, you'd be tucked safely in my arms.
-My hand holding yours, my voice telling you everything is okay.
-So tonight, imagine me next to you, whispering softly:
-"I'm here, Sani. You're safe. Get some rest, my love."`,
+    message: `If the night feels quiet...
+imagine my arms around you.
+You are safe. You are loved.`,
   },
   {
     title: 'When Distance Feels Hard',
-    message: `Some days the distance feels heavier, I know. I feel it too.
-But what we have is bigger than miles, time zones, or waiting.
-We are not just loving each other — we are choosing each other, every single day.
-No matter how long the road takes, it still leads me to you. And I would walk it every time.`,
+    message: `This distance is temporary.
+You and I are permanent.`,
   },
 ]
 
 export default function Home() {
   const [openModal, setOpenModal] = useState<number | null>(null)
+  const [letterOpened, setLetterOpened] = useState(false)
+  const theme = getValentineTheme()
 
   return (
-    <main className="sunflower-pattern snap-scroll-container">
+    <>
+      {!letterOpened && (
+        <OpeningLetterOverlay onOpen={() => setLetterOpened(true)} />
+      )}
+      {letterOpened && <FloatingHearts />}
+      {letterOpened && <ValentineWeekDecorations />}
+      <main className={`sunflower-pattern snap-scroll-container ${!letterOpened ? 'overflow-hidden' : ''}`}>
       {/* Hero Section */}
       <section className="snap-section relative flex items-center justify-center px-4" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <div className="absolute inset-0 z-0">
           {/* Sunflower field background - inspired by golden hour field */}
           <SunflowerField />
           
-          {/* Warm golden hour overlay - sky on top, field on bottom */}
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-200/25 via-yellow-100/15 to-cream/30 z-10"></div>
+          {/* Warm golden hour overlay - sky on top, field on bottom - animated gradient */}
+          {letterOpened && (
+            <motion.div
+              className="absolute inset-0 z-10 hero-animated-gradient"
+              animate={{
+                background: [
+                  'linear-gradient(to bottom, rgba(251, 191, 36, 0.25), rgba(254, 240, 138, 0.15), rgba(255, 239, 229, 0.3))',
+                  'linear-gradient(to bottom, rgba(251, 191, 36, 0.28), rgba(254, 240, 138, 0.18), rgba(255, 239, 229, 0.32))',
+                  'linear-gradient(to bottom, rgba(251, 191, 36, 0.25), rgba(254, 240, 138, 0.15), rgba(255, 239, 229, 0.3))',
+                ],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              style={{
+                background: 'linear-gradient(to bottom, rgba(251, 191, 36, 0.25), rgba(254, 240, 138, 0.15), rgba(255, 239, 229, 0.3))',
+              }}
+            />
+          )}
           
           {/* Background image - add hero-bg.jpg to /public folder */}
           <div 
@@ -67,21 +97,54 @@ export default function Home() {
         </div>
         
         <div className="relative z-20 text-center max-w-3xl mx-auto px-4 hero-text-container">
-          <h1 className="font-script text-5xl sm:text-6xl md:text-7xl text-brown mb-8 animate-fade-in-1 hero-headline">
-            Hi Sani ❤️
-          </h1>
-          <p className="font-sans text-lg sm:text-xl md:text-2xl text-brown/90 mb-8 leading-relaxed animate-fade-in-2 hero-subtitle max-w-2xl mx-auto">
-            Since I can't be there with you this Valentine's Day, I made a little place you can come to whenever you need me.
-          </p>
-          <p className="font-sans text-brown/80 text-sm sm:text-base italic mb-4 animate-fade-in-2 hero-signature">
-            Made with all my love.
-          </p>
-          <p className="font-script text-brown/70 text-xs sm:text-sm italic mb-12 animate-fade-in-2 hero-whisper" style={{ opacity: 0.7, marginTop: '0.5rem' }}>
-            For the girl who holds my heart, even from miles away.
-          </p>
-          <p className="font-sans text-brown/70 text-base sm:text-lg animate-fade-in-3 animate-float hero-cta">
-            Choose how you're feeling…
-          </p>
+          {letterOpened && (
+            <>
+              {/* Day indicator badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.6 }}
+                className="inline-block mb-4 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border-2 border-brown/20 shadow-md"
+              >
+                <span className="font-script text-sm md:text-base text-brown">
+                  {theme.name} {theme.emoji}
+                </span>
+              </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="font-script text-5xl sm:text-6xl md:text-7xl text-brown mb-8 hero-headline"
+              >
+                {theme.heroGreeting}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+                className="font-sans text-lg sm:text-xl md:text-2xl text-brown/90 mb-8 leading-relaxed hero-subtitle max-w-2xl mx-auto"
+              >
+                Since I can't be there with you this Valentine's Day, I made a little place you can come to whenever you need me.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.8, ease: 'easeOut' }}
+                className="font-sans text-brown/80 text-sm sm:text-base italic mb-4 hero-signature"
+              >
+                Made with all my love.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.8, ease: 'easeOut' }}
+                className="font-script text-brown/70 text-xs sm:text-sm italic mb-12 hero-whisper"
+                style={{ opacity: 0.7, marginTop: '0.5rem' }}
+              >
+                For the girl who holds my heart, even from miles away.
+              </motion.p>
+            </>
+          )}
         </div>
 
         {/* Scroll indicator */}
@@ -92,40 +155,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Couple Photo Section - Memory Moment */}
-      <section className="snap-section relative flex items-center justify-center px-4 bg-peach/30" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
-        <SunflowerDecoration position="top-center" />
-        <div className="max-w-xl mx-auto w-full">
-          <div className="flex justify-center mb-6 animate-fade-in">
-            <div className="relative w-full max-w-md mx-auto">
-              <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden border-2 border-sunflower bg-gradient-to-br from-sunflower/20 to-blush/20" style={{ boxShadow: '0 20px 40px rgba(246,197,68,0.35)' }}>
-                <img
-                  src="/together.jpg"
-                  alt="Us together"
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    // Show placeholder if image fails to load
-                    target.style.display = 'none'
-                    const placeholder = target.parentElement?.querySelector('.image-placeholder')
-                    if (placeholder) {
-                      (placeholder as HTMLElement).style.display = 'flex'
-                    }
-                  }}
-                />
-                <div className="image-placeholder absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sunflower/20 to-blush/20" style={{ display: 'none' }}>
-                  <p className="text-brown/60 font-sans text-sm text-center px-4">
-                    Please add together.jpg to /public folder<br />
-                    (Convert HEIC to JPG if needed)
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="text-center font-script text-xl md:text-2xl text-brown/90 italic animate-fade-in-2">
-            My favorite place has always been next to you.
-          </p>
-        </div>
+      {/* Timeline Section */}
+      <section className="snap-section relative flex items-center justify-center px-4 bg-cream" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
+        <Timeline />
       </section>
 
       {/* Feelings Section */}
@@ -188,14 +220,22 @@ export default function Home() {
             No matter where we are, my heart is always with you, Sani 🌻
             <br />
             <span className="font-script text-3xl md:text-4xl mt-6 inline-block" style={{ marginTop: '1.5rem' }}>
-              Happy Valentine&apos;s Day ❤️
+              {theme.footerMessage}
             </span>
           </p>
         </div>
       </footer>
 
       {/* Audio Player - Floating Button */}
-      <AudioPlayer />
+      {letterOpened && (
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.7, duration: 0.8, ease: 'easeOut' }}
+        >
+          <AudioPlayer onLetterOpen={letterOpened} />
+        </motion.div>
+      )}
       
       {/* Scroll Navigation Dots */}
       <ScrollDots />
@@ -203,6 +243,7 @@ export default function Home() {
       {/* Enforce snap behavior */}
       <EnforceSnap />
     </main>
+    </>
   )
 }
 

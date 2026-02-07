@@ -4,11 +4,13 @@ import { useState, useEffect, useRef } from 'react'
 
 export default function ScrollDots() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [totalSections, setTotalSections] = useState(6)
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
     const sections = document.querySelectorAll('.snap-section')
     sectionsRef.current = Array.from(sections) as HTMLElement[]
+    setTotalSections(sectionsRef.current.length)
 
     const observerOptions = {
       root: null,
@@ -50,9 +52,6 @@ export default function ScrollDots() {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
-
-  // Total number of sections (hero, couple photo, feelings, photo, footer)
-  const totalSections = 5
 
   return (
     <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">

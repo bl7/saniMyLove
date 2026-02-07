@@ -415,3 +415,80 @@ button[class*="hover:scale"]:hover:not(:disabled) {
   animation-delay: 2.5s;
 }
 
+/* Floating hearts animation */
+@keyframes floatHeart {
+  0% { 
+    transform: translateY(0) translateX(0) rotate(0deg); 
+    opacity: 0; 
+  }
+  20% { 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: translateY(-100vh) translateX(50px) rotate(30deg); 
+    opacity: 0; 
+  }
+}
+
+.floating-heart {
+  animation: floatHeart 10s ease-out infinite;
+}
+
+/* Photo hover effect - removed for static images */
+
+/* Timeline card hover effect */
+.timeline-card-hover {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.timeline-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Animated gradient for hero background */
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-animated-gradient {
+  background: linear-gradient(270deg, #f5e6d3, #f7efe5, #ffebe0);
+  background-size: 600% 600%;
+  animation: animatedGradient 20s ease infinite;
+}
+
+/* Modal overlay blur */
+.modal-overlay {
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.3);
+}
+
+/* Floating day emojis animation */
+@keyframes floatDayEmoji {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px) rotate(10deg);
+    opacity: 0.25;
+  }
+}
+
+.floating-day-emoji {
+  animation: floatDayEmoji 10s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

@@ -9,14 +9,12 @@ declare global {
   }
 }
 
-export default function AudioPlayer() {
+export default function AudioPlayer({ onLetterOpen }: { onLetterOpen: boolean }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const playerRef = useRef<any>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  // Replace this with your YouTube video ID
-  // For example, if the URL is https://www.youtube.com/watch?v=2Vv-BfVoq4g
-  // The video ID is: 2Vv-BfVoq4g
+  const baseVolumeRef = useRef(40) // Base volume at 40%
   const youtubeVideoId = '2Vv-BfVoq4g' // Ed Sheeran - Perfect (Official Audio)
 
   useEffect(() => {
@@ -48,6 +46,7 @@ export default function AudioPlayer() {
             events: {
               onReady: () => {
                 setIsReady(true)
+                playerRef.current.setVolume(0) // Start with 0 volume for fade-in
               },
               onStateChange: (event: any) => {
                 // YT.PlayerState.PLAYING = 1
@@ -83,6 +82,7 @@ export default function AudioPlayer() {
         events: {
           onReady: () => {
             setIsReady(true)
+            playerRef.current.setVolume(0) // Start with 0 volume for fade-in
           },
           onStateChange: (event: any) => {
             if (event.data === 1) {
@@ -106,6 +106,69 @@ export default function AudioPlayer() {
     }
   }, [youtubeVideoId])
 
+  // Effect for scroll-based volume adjustment
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!playerRef.current || !isPlaying) return
+      
+      const scrollContainer = document.querySelector('.snap-scroll-container') as HTMLElement
+      if (!scrollContainer) return
+      
+      const scrollTop = scrollContainer.scrollTop
+      const maxScroll = scrollContainer.scrollHeight - window.innerHeight
+      const scrollPercent = scrollTop / maxScroll
+      
+      // Reduce volume as user scrolls down (from 40% to 20%)
+      const volumeReduction = scrollPercent * 0.5 // 0 to 0.5 multiplier
+      const adjustedVolume = Math.max(20, baseVolumeRef.current * (1 - volumeReduction))
+      
+      try {
+        playerRef.current.setVolume(Math.round(adjustedVolume))
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+
+    const scrollContainer = document.querySelector('.snap-scroll-container')
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+    }
+
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [isPlaying])
+
+  // Effect to play music when letter opens
+  useEffect(() => {
+    if (onLetterOpen && isReady && !isPlaying) {
+      playerRef.current.setVolume(0)
+      playerRef.current.playVideo()
+
+      let currentVolume = 0
+      const targetVolume = baseVolumeRef.current
+      const steps = 20 // 20 steps over 2 seconds = 100ms per step
+      const volumeIncrement = targetVolume / steps
+      
+      const fadeInterval = setInterval(() => {
+        currentVolume += volumeIncrement
+        if (currentVolume >= targetVolume) {
+          currentVolume = targetVolume
+          clearInterval(fadeInterval)
+        }
+        try {
+          if (playerRef.current) {
+            playerRef.current.setVolume(Math.round(currentVolume))
+          }
+        } catch (e) {
+          clearInterval(fadeInterval)
+        }
+      }, 100)
+    }
+  }, [onLetterOpen, isReady, isPlaying])
+
   const togglePlay = () => {
     if (playerRef.current && isReady) {
       if (isPlaying) {
@@ -117,7 +180,7 @@ export default function AudioPlayer() {
         
         // Fade in volume over 2 seconds (40% max volume)
         let currentVolume = 0
-        const targetVolume = 40
+        const targetVolume = baseVolumeRef.current
         const steps = 20 // 20 steps over 2 seconds = 100ms per step
         const volumeIncrement = targetVolume / steps
         
