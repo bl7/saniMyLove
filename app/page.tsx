@@ -156,18 +156,18 @@ export default function Home() {
       </section>
 
       {/* Timeline Section */}
-      <section className="snap-section relative flex items-center justify-center px-4 bg-cream" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
+      <section className="snap-section relative flex items-center justify-center px-2 sm:px-4 bg-cream overflow-hidden" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <Timeline />
       </section>
 
       {/* Feelings Section */}
-      <section className="snap-section relative flex items-center justify-center px-4" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
+      <section className="snap-section relative flex items-center justify-center px-4 sm:px-6" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="top-right" />
-        <div className="max-w-4xl mx-auto w-full">
-          <h2 className="font-script text-3xl md:text-4xl text-brown text-center mb-12 animate-fade-in">
+        <div className="max-w-4xl mx-auto w-full py-8">
+          <h2 className="font-script text-2xl sm:text-3xl md:text-4xl text-brown text-center mb-8 sm:mb-12 px-4 animate-fade-in">
             A message for you...
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-2 sm:px-0">
             {feelings.map((feeling, index) => (
               <FeelingButton
                 key={index}
@@ -191,11 +191,11 @@ export default function Home() {
       </section>
 
       {/* Photo Section */}
-      <section className="snap-section relative flex items-center justify-center px-4" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
+      <section className="snap-section relative flex items-center justify-center px-4 sm:px-6" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="bottom-left" />
-        <div className="max-w-xl mx-auto text-center w-full">
-          <div className="relative mb-6 animate-fade-in">
-            <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(246,197,68,0.25)] border-2 border-sunflower animate-float-photo">
+        <div className="max-w-xl mx-auto text-center w-full py-8">
+          <div className="relative mb-4 sm:mb-6 animate-fade-in px-4">
+            <div className="relative w-full max-w-[280px] sm:max-w-md mx-auto aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(246,197,68,0.25)] border-2 border-sunflower animate-float-photo">
               <Image
                 src="/sani.JPG"
                 alt="Sani"
@@ -206,20 +206,20 @@ export default function Home() {
             </div>
             <SunflowerPetals />
           </div>
-          <p className="font-script text-3xl md:text-4xl text-brown mt-8 animate-fade-in">
+          <p className="font-script text-2xl sm:text-3xl md:text-4xl text-brown mt-6 sm:mt-8 px-4 animate-fade-in">
             My favorite person. My forever Valentine.
           </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="snap-section relative flex items-center justify-center px-4 bg-peach" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
+      <footer className="snap-section relative flex items-center justify-center px-4 sm:px-6 bg-peach" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
         <SunflowerDecoration position="bottom-right" />
-        <div className="max-w-3xl mx-auto text-center relative z-10 w-full">
-          <p className="font-sans text-xl md:text-2xl text-brown leading-relaxed animate-fade-in">
+        <div className="max-w-3xl mx-auto text-center relative z-10 w-full py-8">
+          <p className="font-sans text-lg sm:text-xl md:text-2xl text-brown leading-relaxed animate-fade-in px-4">
             No matter where we are, my heart is always with you, Sani 🌻
             <br />
-            <span className="font-script text-3xl md:text-4xl mt-6 inline-block" style={{ marginTop: '1.5rem' }}>
+            <span className="font-script text-2xl sm:text-3xl md:text-4xl mt-4 sm:mt-6 inline-block" style={{ marginTop: '1rem' }}>
               {theme.footerMessage}
             </span>
           </p>

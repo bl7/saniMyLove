@@ -39,7 +39,7 @@ export default function FeelingModal({ isOpen, onClose, title, message }: Feelin
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="bg-peach rounded-3xl shadow-2xl max-w-2xl w-full p-12 relative border-2 border-blush/30"
+            className="bg-peach rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 md:p-12 relative border-2 border-blush/30"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -52,10 +52,10 @@ export default function FeelingModal({ isOpen, onClose, title, message }: Feelin
             <div className="text-center mb-6">
               <span className="text-4xl">🌻</span>
             </div>
-            <h2 className="font-script text-4xl md:text-5xl text-brown mb-8 text-center">
+            <h2 className="font-script text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brown mb-6 sm:mb-8 text-center px-2">
               {title}
             </h2>
-            <p className="font-script text-brown/90 leading-relaxed text-xl md:text-2xl whitespace-pre-line text-center">
+            <p className="font-script text-brown/90 leading-relaxed text-base sm:text-lg md:text-xl lg:text-2xl whitespace-pre-line text-center px-2">
               {message}
             </p>
             <div className="mt-10 text-center">
